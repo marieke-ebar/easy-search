@@ -1,0 +1,23 @@
+.vertical-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-icon {
+    max-height: 20px;
+}
+
+.bg-lgrey {
+    background-color: lightgray;
+}
+
+.fixed-text-in {
+    resize: none;
+    height: 200px;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+}

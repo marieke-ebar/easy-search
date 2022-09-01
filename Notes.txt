@@ -1,0 +1,43 @@
+Google
+    /search?q={qry}&tbs=qdr:{t}
+    d, w, m, y
+
+    **
+    query: 
+    q=test
+
+    **
+    show results from the past X (time): y/m/w/d
+    tbs=qdr:w
+
+    Custom:
+    11 Jul 2022 : 27 Jul =
+    tbs=cdr%3A1%2Ccd_min%3A7%2F11%2F2022%2Ccd_max%3A7%2F27%2F2022
+    10 Jul 2022 : 27 Jul =
+    tbs=cdr%3A1%2Ccd_min%3A7%2F10%2F2022%2Ccd_max%3A7%2F27%2F2022&tbm=
+    cdr%3A1%2Ccd_min%3A1%2F1%2F${year-since}%2Ccd_max%3A&tbm=
+
+    ** XOR !!!!
+    Verbatim:
+    tbs=li:1
+
+Maps
+    /maps/search/{qry}/
+
+DuckDuckGo
+    /?q={qry}&df={t}
+    d, w, m, y
+    custom: &df=2022-07-03..2022-07-20
+
+
+
+YouTube
+    /results?search_query={qry}
+
+Udemy
+    https://www.udemy.com/courses/search/?q={qry}
+
+
+Academic
+Scholar
+    as_ylo={year}&as_yhi={year}

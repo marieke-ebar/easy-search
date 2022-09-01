@@ -1,0 +1,282 @@
+@use 'sass:color';
+@import "../bulma/sass/utilities/mixins.sass";
+
+$tabs-width: 12.5rem;
+// $tabs-font-size: 1rem;
+// $search-form-bg-color: hsl(229, 53%, 53%);
+
+$search-form-bg-color: hsl(229, 95%, 68%);
+
+$li-bg-color: hsla(0, 0%, 97%, 70%);
+$srch-form-padding: 1rem 1rem 1.5rem;
+$srch-area-bg: hsla(210, 53%, 70%, 0.7);
+
+$srch-form-bg: transparent;
+// $srch-form-bg: hsl(0, 0%, 96%);
+$srch-ctrl-bg: white;
+$control-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.2);
+$srch-ctrl-darken: color.scale($srch-ctrl-bg, $lightness: -11%);
+
+$placeholder-color: hsl(0, 0%, 30%);
+
+
+.search-page {
+    height: 100vh;
+    width: auto;
+    background-image: url('./Canada.jpg');
+    background-size: cover;
+    // text-align: center;
+
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+a,
+a:visited {
+    border: none !important;
+}
+
+#logo {
+    width: auto;
+    height: 150px;
+}
+
+#form-app-input {
+    display: flex;
+    height: 14.5rem;
+    flex-direction: column;
+}
+
+#query-text {
+    // position: absolute;
+    padding: 0;
+    // bottom: 1.5rem;
+    margin-top: auto;
+}
+
+#form-submit {
+    visibility: hidden;
+}
+
+.search-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: min-content;
+    border-radius: 5px;
+    background-color: $srch-area-bg;
+    padding: 3rem;
+
+    @include mobile {
+        padding: 1.25rem 1rem;
+    }
+}
+
+.search-form-box {
+    background-color: $srch-form-bg;
+
+    .search-form {
+        padding: $srch-form-padding;
+    }
+
+    .field-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+    }
+
+    #site-filter {
+        padding-right: 0.5rem;
+    }
+
+    .search-options {
+        // display: flex;
+
+        #year-label {
+            margin-left: 1rem;
+            // align-self: center;
+            // justify-self: flex-end;
+        }
+    }
+
+    .field .control {
+        .select.is-info {
+            -webkit-box-shadow: $control-shadow;
+            -moz-box-shadow: $control-shadow;
+            box-shadow: $control-shadow;
+            display: inline-block;
+            border-radius: 5px;
+
+            &.inactive {
+                opacity: 0.7;
+                box-shadow: none;
+                background-color: $srch-ctrl-darken;
+            }
+
+            .inactive {
+                opacity: 0.7;
+                box-shadow: none;
+                background-color: $srch-ctrl-darken;
+            }
+
+            select {
+                border: 1px solid black;
+            }
+        }
+
+        .input {
+            box-shadow: $control-shadow;
+
+            &.inactive {
+                opacity: 0.7;
+                background-color: $srch-ctrl-darken;
+                box-shadow: none;
+            }
+        }
+    }
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $placeholder-color;
+        opacity: 1;
+        /* Firefox */
+        font-style: italic;
+    }
+
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: $placeholder-color;
+        font-style: italic;
+    }
+}
+
+.search-page {
+
+    .tabs {
+        position: relative;
+        left: 1px;
+        margin: 0;
+    }
+
+    .wrapper {
+        position: relative;
+        z-index: 3;
+        width: 40vw;
+        max-width: 50rem;
+        min-width: 35rem;
+        // height: 20rem;
+        padding: 1rem 1.5rem;
+        border-radius: 0 5px 5px 0;
+        background-color: $search-form-bg-color;
+
+        .field-label {
+            flex-grow: 0;
+        }
+
+        .label {
+            color: wheat;
+        }
+    }
+
+    .search-form-box {
+        border-radius: 5px;
+    }
+
+    #active-filter-data {
+        position: absolute;
+        z-index: -2;
+        visibility: hidden;
+    }
+
+    .tabs.tabs.is-toggle ul {
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        // align-items: flex;
+
+        :first-child {
+            margin-top: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: flex-start;
+            background-color: $li-bg-color;
+            border-radius: 10px 0 0 10px;
+            width: $tabs-width;
+            margin: 0.2rem 0 0 0;
+
+            @include mobile {
+                width: min-content;
+
+                &.tab-item.is-active {
+                    width: min-content;
+                }
+
+                a {
+                    padding: 0.5em 0.7rem;
+
+                    span.icon {
+                        margin: 0;
+                    }
+                }
+            }
+
+            :hover {
+                background-color: transparent;
+            }
+
+            &.is-active {
+                background-color: $search-form-bg-color;
+                color: white;
+                border-radius: 10px 0 0 10px;
+                border: none;
+                width: $tabs-width;
+                align-items: center;
+
+                a {
+                    background-color: $search-form-bg-color;
+                }
+            }
+
+            a {
+                border-radius: inherit;
+                align-self: center;
+                border: none;
+                color: black;
+
+                // text-align: center;
+                span {
+                    text-align: center;
+                }
+
+                :hover {
+                    border: none;
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .field .field-label label {
+            // display: inline-block;
+            min-width: 15rem;
+        }
+    }
+}
+
+
+// Remove Number Arrows in Number Input
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
