@@ -33,9 +33,9 @@ $placeholder-color: hsl(0, 0%, 30%);
     }
 }
 
-a,
-a:visited {
-    border: none !important;
+a:focus, a:active {
+    outline: none;
+    -moz-outline-style: none;
 }
 
 #logo {
@@ -154,6 +154,17 @@ a:visited {
 }
 
 .search-page {
+    .error-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .error-msge {
+        margin-top: -2rem;
+        margin-left: 12.5rem;
+        width: 40vw;
+    }
 
     .tabs {
         position: relative;

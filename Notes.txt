@@ -41,3 +41,7 @@ Udemy
 Academic
 Scholar
     as_ylo={year}&as_yhi={year}
+
+
+    https://duckduckgo.com/?q=test+site%3Anu.nl&df=2022-07-17..2022-09-19&ia=web
+    https://duckduckgo.com/?q=test+site%3Anu.nl&df=2010-01-01..2022-8-19&ia=web

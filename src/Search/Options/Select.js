@@ -1,5 +1,5 @@
 const Select = ({ options, selected, setValue, isActive, changeFocus }) => {
-    const handleChange = e => {
+    function handleChange(e) {
         console.log(e.target.value);
         setValue(e.target.value);
     };

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ConditionalControls from './ConditionalControls'
+import SearchOptions from './SearchOptions'
 import searchIcon from './Icons/icons8-search-48.png';
 import getSearchRequest from "./redirect";
 
-const SearchForm = ({ searchType }) => {
+const SearchForm = ({ searchType, setErrMsge }) => {
   const [query, setQuery] = useState("");
-  const [siteSrch, setSiteSrch] = useState("");
-  const [dateRange, setDateRange] = useState("");
   const [searchMsge, setSearchMsge] = useState('Search');
-  const responseBody = {}
+  const searchOpts = {}
 
   useEffect(() => {
     const ENUM_SearchText = {
@@ -23,23 +21,53 @@ const SearchForm = ({ searchType }) => {
   function submitRedirect(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    formData.forEach((value, property) => responseBody[property] = value);
-    const activeFilter = responseBody['active-filter']
-    console.log(activeFilter + 'werwee')
-    if(activeFilter === '0')
-      delete responseBody['year-since'];
-    else if(activeFilter === '1')
-      delete responseBody['period-select'];
-    getSearchRequest(searchType, activeFilter, responseBody);
-    // console.log(JSON.stringify(responseBody));
-  };
+    if (['google', 'duckduckgo', 'maps'].includes(searchType))
+      doRegularSearch(formData)
+  }
+  // console.log(JSON.stringify(responseBody));
+
+  function doRegularSearch(formData) {
+    formData.forEach((value, property) => searchOpts[property] = value);
+    const activeFilter = searchOpts['active-filter']
+    if (searchOpts['site-search'].length > 0 && ! isURLCorrect(searchOpts['site-search'])) {
+      setErrMsge({ title: 'Site URL Input Error', text: `Please Input a Correct URL for the Website to Search Within.` });
+      return;
+    }
+
+    if (activeFilter === '0')
+      delete searchOpts['year-since'];
+    else if (activeFilter === '1') {
+      delete searchOpts['period-select'];
+      console.dir(JSON.stringify(searchOpts))
+      const inputYearNr = searchOpts['year-since'];
+      if (inputYearNr.length > 0 && (inputYearNr < 1991 || inputYearNr > new Date().getFullYear())) {
+        displayInputError('year-input-error');
+        return;
+      }
+    }
+
+    const newUrl = getSearchRequest(searchType, activeFilter, searchOpts);
+    setErrMsge(null);
+    window.open(newUrl, '_blank').focus();
+  }
+
+  function displayInputError(error) {
+    if (error === 'year-input-error')
+      setErrMsge({ title: 'Year Input Error', text: `Please Input a Year between 1991 and ${new Date().getFullYear()}.` })
+  }
+
+  function isURLCorrect(URL) {
+    if (!URL.includes('.') || URL.length < 4) {
+      return false;
+    }
+    else
+      return true;
+  }
 
   return (
     <form className="search-form" id="form-app-input" onSubmit={submitRedirect}>
       {searchType &&
-        <ConditionalControls type={searchType}
-          dateRange={dateRange} setDateRange={setDateRange}
-          siteSrch={siteSrch} setSiteSrch={setSiteSrch}
+        <SearchOptions type={searchType}
         />}
 
       <div id="query-text" className="field has-text-centered">
@@ -51,7 +79,6 @@ const SearchForm = ({ searchType }) => {
         </p>
         <input id="form-submit" type="submit" />
       </div>
-
 
       {/* <div className="field-label is-normal">
                   <label className="label">Genre</label>

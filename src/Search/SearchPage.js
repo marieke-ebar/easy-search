@@ -10,14 +10,19 @@ import './search.scss';
 import SearchForm from './SearchForm';
 import Tab from './Tab';
 
-const Search = () => {
+const SearchPage = () => {
   const [activeTab, setActiveTab] = useState("google");
+  const [errorMessage, setErrMsge] = useState(null);
 
   function handleTabClick(e, tab) {
     e.preventDefault();
     setActiveTab(tab);
     console.log(tab)
   };
+
+  function deleteErr() {
+    setErrMsge(null);
+  }
 
   return (
     <div className="search-page">
@@ -62,7 +67,7 @@ const Search = () => {
             <div className="wrapper">
 
               <div className="search-form-box">
-                <SearchForm searchType={activeTab} />
+                <SearchForm searchType={activeTab} setErrMsge={setErrMsge} />
               </div>
             </div>
 
@@ -71,8 +76,21 @@ const Search = () => {
         </div>
 
       </article>
+
+      <div className="error-wrapper">
+        {errorMessage && <article className="message is-warning error-msge">
+          <div className="message-header">
+            <p>{errorMessage.title}</p>
+            <button className="delete" aria-label="delete" onClick={deleteErr} ></button>
+          </div>
+          <div className="message-body">
+            {errorMessage.text}
+          </div>
+        </article>}
+      </div>
+
     </div>
   );
 }
 
-export default Search;
+export default SearchPage;
